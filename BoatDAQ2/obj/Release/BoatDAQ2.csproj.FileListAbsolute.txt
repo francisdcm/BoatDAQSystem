@@ -1,0 +1,11 @@
+C:\Research\C# Code\BoatDAQ2\BoatDAQ2\obj\Release\BoatDAQ2.csprojAssemblyReference.cache
+C:\Research\C# Code\BoatDAQ2\BoatDAQ2\obj\Release\BoatDAQ2.Form1.resources
+C:\Research\C# Code\BoatDAQ2\BoatDAQ2\obj\Release\BoatDAQ2.Properties.Resources.resources
+C:\Research\C# Code\BoatDAQ2\BoatDAQ2\obj\Release\BoatDAQ2.csproj.GenerateResource.cache
+C:\Research\C# Code\BoatDAQ2\BoatDAQ2\obj\Release\BoatDAQ2.csproj.CoreCompileInputs.cache
+C:\Research\C# Code\BoatDAQ2\BoatDAQ2\bin\Release\BoatDAQ2.exe.config
+C:\Research\C# Code\BoatDAQ2\BoatDAQ2\bin\Release\BoatDAQ2.exe
+C:\Research\C# Code\BoatDAQ2\BoatDAQ2\bin\Release\BoatDAQ2.pdb
+C:\Research\C# Code\BoatDAQ2\BoatDAQ2\obj\Release\BoatDAQ2.csproj.CopyComplete
+C:\Research\C# Code\BoatDAQ2\BoatDAQ2\obj\Release\BoatDAQ2.exe
+C:\Research\C# Code\BoatDAQ2\BoatDAQ2\obj\Release\BoatDAQ2.pdb

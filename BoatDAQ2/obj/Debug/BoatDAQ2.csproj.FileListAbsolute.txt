@@ -1,0 +1,26 @@
+C:\Users\fliu23\source\repos\BoatDAQ2\BoatDAQ2\bin\Debug\BoatDAQ2.exe.config
+C:\Users\fliu23\source\repos\BoatDAQ2\BoatDAQ2\bin\Debug\BoatDAQ2.exe
+C:\Users\fliu23\source\repos\BoatDAQ2\BoatDAQ2\bin\Debug\BoatDAQ2.pdb
+C:\Users\fliu23\source\repos\BoatDAQ2\BoatDAQ2\bin\Debug\USDigital.dll
+C:\Users\fliu23\source\repos\BoatDAQ2\BoatDAQ2\bin\Debug\USDQSB.dll
+C:\Users\fliu23\source\repos\BoatDAQ2\BoatDAQ2\bin\Debug\AGauge.dll
+C:\Users\fliu23\source\repos\BoatDAQ2\BoatDAQ2\obj\Debug\BoatDAQ2.csprojAssemblyReference.cache
+C:\Users\fliu23\source\repos\BoatDAQ2\BoatDAQ2\obj\Debug\BoatDAQ2.Form1.resources
+C:\Users\fliu23\source\repos\BoatDAQ2\BoatDAQ2\obj\Debug\BoatDAQ2.Properties.Resources.resources
+C:\Users\fliu23\source\repos\BoatDAQ2\BoatDAQ2\obj\Debug\BoatDAQ2.csproj.GenerateResource.cache
+C:\Users\fliu23\source\repos\BoatDAQ2\BoatDAQ2\obj\Debug\BoatDAQ2.csproj.CoreCompileInputs.cache
+C:\Users\fliu23\source\repos\BoatDAQ2\BoatDAQ2\obj\Debug\BoatDAQ2.csproj.CopyComplete
+C:\Users\fliu23\source\repos\BoatDAQ2\BoatDAQ2\obj\Debug\BoatDAQ2.exe
+C:\Users\fliu23\source\repos\BoatDAQ2\BoatDAQ2\obj\Debug\BoatDAQ2.pdb
+C:\Research\C# Code\BoatDAQ2\BoatDAQ2\bin\Debug\BoatDAQ2.exe.config
+C:\Research\C# Code\BoatDAQ2\BoatDAQ2\bin\Debug\BoatDAQ2.exe
+C:\Research\C# Code\BoatDAQ2\BoatDAQ2\bin\Debug\BoatDAQ2.pdb
+C:\Research\C# Code\BoatDAQ2\BoatDAQ2\bin\Debug\AGauge.dll
+C:\Research\C# Code\BoatDAQ2\BoatDAQ2\obj\Debug\BoatDAQ2.csprojAssemblyReference.cache
+C:\Research\C# Code\BoatDAQ2\BoatDAQ2\obj\Debug\BoatDAQ2.Form1.resources
+C:\Research\C# Code\BoatDAQ2\BoatDAQ2\obj\Debug\BoatDAQ2.Properties.Resources.resources
+C:\Research\C# Code\BoatDAQ2\BoatDAQ2\obj\Debug\BoatDAQ2.csproj.GenerateResource.cache
+C:\Research\C# Code\BoatDAQ2\BoatDAQ2\obj\Debug\BoatDAQ2.csproj.CoreCompileInputs.cache
+C:\Research\C# Code\BoatDAQ2\BoatDAQ2\obj\Debug\BoatDAQ2.csproj.CopyComplete
+C:\Research\C# Code\BoatDAQ2\BoatDAQ2\obj\Debug\BoatDAQ2.exe
+C:\Research\C# Code\BoatDAQ2\BoatDAQ2\obj\Debug\BoatDAQ2.pdb
