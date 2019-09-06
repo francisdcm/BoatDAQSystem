@@ -14,11 +14,8 @@ using System.IO.Ports;
 using System.Diagnostics;
 using System.Collections.Concurrent;
 
-namespace BoatDAQ2
-{
-    public partial class Form1 : Form
-    {
-
+namespace BoatDAQ2{
+    public partial class Form1 : Form {
         List<string> ports = new List<string>();
         List<Device> devices = new List<Device>();
         List<BackgroundWorker> backgroundWorkers = new List<BackgroundWorker>(); //initialize
@@ -64,7 +61,7 @@ namespace BoatDAQ2
                     QSBDevices tempQSB = new QSBDevices();
                     tempQSB.connectDevice(ports[portOptionsBox.SelectedIndex], deviceTable, outputText, 0);
                     devices.Add(tempQSB);
-                    tempQSB.initializeChart("Encoder Count", "Count", tempQSB.getNumDevices());
+                    tempQSB.initializeChart("Encoder Count", "Count");
                     tempQSB.setChartOrigin(12, 230 + 200 * (devices.Count - 1));
                     Controls.Add(tempQSB.getChart());
                     zeroEncoderButton.Enabled = true;
@@ -74,7 +71,7 @@ namespace BoatDAQ2
                     RiekerInclinometer tempAngleReader = new RiekerInclinometer();
                     tempAngleReader.connectDevice(ports[portOptionsBox.SelectedIndex], deviceTable, outputText, 1);
                     devices.Add(tempAngleReader);
-                    tempAngleReader.initializeChart("Angle", "Angle (degrees)", 1);
+                    tempAngleReader.initializeChart("Inclinometer" + tempAngleReader.getPort(), "Angle (degrees)");
                     tempAngleReader.setChartOrigin(12, 230 + 200 * (devices.Count - 1));
                     Controls.Add(tempAngleReader.getChart());
                     break;
@@ -141,23 +138,38 @@ namespace BoatDAQ2
             else {
                 outputText.AppendText("Data collection ended.\n");
             }
-            outputText.AppendText("Data points collected:  " + devices[0].getDeviceValues().Count + "\n");
+            for(int i = 0; i<devices.Count; i++) {
+                if(devices[i].getDeviceType() == 0) {
+                    outputText.AppendText("Encoder data points collected:  " + ((QSBDevices)devices[i]).getQSBData().Count + "\n");
+                }
+                else if(devices[i].getDeviceType() == 1) {
+                    outputText.AppendText("Inclinometer data points collected:  " + devices[i].getDeviceValues().Count + "\n");
+                }
+                else {
+                    outputText.AppendText("Data points collected:  " + devices[i].getDeviceValues().Count + "\n");
+                }
+            }
+           
         }
 
         private void startRecordingButton_Click(object sender, EventArgs e) {
             stopRecodingButton.Enabled = true;
             startRecordingButton.Enabled = false;
+            plotDataCheckBox.Checked = true;
             for (int i = 0; i < devices.Count; i++) {
                 backgroundWorkers[i].RunWorkerAsync(i);
             }
+            
         }
 
         private void stopRecodingButton_Click(object sender, EventArgs e) {
             for (int i = backgroundWorkers.Count - 1; i >= 0; --i) {
                 backgroundWorkers[i].CancelAsync();
             }
+            plotDataCheckBox.Checked = false;
             stopRecodingButton.Enabled = false;
             startRecordingButton.Enabled = true;
+
         }
 
         private void Form1_Load(object sender, EventArgs e) { }
@@ -177,6 +189,7 @@ namespace BoatDAQ2
         private void listDiagButton_Click(object sender, EventArgs e) {
             outputText.AppendText("number of devices: " + devices.Count + " number of " +
                 "background workers: " + backgroundWorkers.Count + "\n");
+            
         }
 
         private void showGraphsButton_Click(object sender, EventArgs e) {
@@ -243,6 +256,23 @@ namespace BoatDAQ2
                 if (devices[i].getDeviceType() == 0) {
                     ((QSBDevices)devices[i]).changeQSBResolution((int)maxCountUpDown.Value);
                     break;
+                }
+            }
+        }
+
+        private void plotDataCheckBox_CheckedChanged(object sender, EventArgs e) {
+            if(plotDataCheckBox.Checked == true) {
+                for(int i = 0; i<devices.Count; i++) {
+                    if(devices[i].getDeviceType() == 0) {
+                        ((QSBDevices)devices[i]).setRecordData(true);
+                    }
+                }
+            }
+            if (plotDataCheckBox.Checked == false) {
+                for (int i = 0; i < devices.Count; i++) {
+                    if (devices[i].getDeviceType() == 0) {
+                        ((QSBDevices)devices[i]).setRecordData(false);
+                    }
                 }
             }
         }

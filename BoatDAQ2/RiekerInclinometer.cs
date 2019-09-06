@@ -36,22 +36,22 @@ namespace BoatDAQ2
         public override void readData(DataGridView deviceTable, int rowNumber) {
             //reads an instant of data
             try {
-                if (watch.ElapsedMilliseconds % 10 <= 5) { //H4S output data protocol: every 25 ms, mod10 to slow it down
-                    //get current reading, plot it, save the data
-                    string result = angleReader.ReadLine();
-                    long time = watch.ElapsedMilliseconds;
-                    double angleReading = double.Parse(result.Substring(1));
-                    if (result[0] == '-') { //for negative values
-                        angleReading = angleReading * -1;
-                    }
+                if (watch.ElapsedMilliseconds % 10 <= 5) { //H4S output data protocol: every 25 ms, mod10 to slow it down                   
                     dataChart.Invoke((MethodInvoker)delegate {
+                        //get current reading, plot it, save the data
+                        string result = angleReader.ReadLine();
+                        long time = watch.ElapsedMilliseconds;
+                        double angleReading = double.Parse(result.Substring(1));
+                        if (result[0] == '-') { //for negative values
+                            angleReading = angleReading * -1;
+                        }
                         // Running on the UI thread
                         dataChart.Series[0].Points.AddXY(time, angleReading);
-                    });
-                    deviceTimeStamps.Add(time);
-                    deviceValues.Add(angleReading);
-                   deviceTable[2, rowNumber].Value = angleReading.ToString();
-                   deviceTable[4, rowNumber].Value = time.ToString();                  
+                        deviceTimeStamps.Add(time);
+                        deviceValues.Add(angleReading);
+                        deviceTable[2, rowNumber].Value = angleReading.ToString();
+                        deviceTable[4, rowNumber].Value = time.ToString();
+                    });                  
                 }
             }
             catch {

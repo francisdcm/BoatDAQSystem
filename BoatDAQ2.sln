@@ -16,13 +16,16 @@ Global
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{90D0C099-D83B-4479-A9FF-A4BCFDD600EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{90D0C099-D83B-4479-A9FF-A4BCFDD600EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{90D0C099-D83B-4479-A9FF-A4BCFDD600EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{90D0C099-D83B-4479-A9FF-A4BCFDD600EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90D0C099-D83B-4479-A9FF-A4BCFDD600EC}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{90D0C099-D83B-4479-A9FF-A4BCFDD600EC}.Release|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CAE4166C-DB40-48BC-83DA-279AA9E6994C}
+	EndGlobalSection
+	GlobalSection(Performance) = preSolution
+		HasPerformanceSessions = true
 	EndGlobalSection
 EndGlobal

@@ -44,6 +44,11 @@
             this.button3 = new System.Windows.Forms.Button();
             this.zeroEncoderButton = new System.Windows.Forms.Button();
             this.deviceTable = new System.Windows.Forms.DataGridView();
+            this.colCOMPort = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDeviceType2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colReading2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colUnits2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTime2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.startRecordingButton = new System.Windows.Forms.Button();
             this.stopRecodingButton = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -52,11 +57,7 @@
             this.listDiagButton = new System.Windows.Forms.Button();
             this.dataReader = new System.ComponentModel.BackgroundWorker();
             this.chooseFolderDialog = new System.Windows.Forms.FolderBrowserDialog();
-            this.colCOMPort = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDeviceType2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colReading2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colUnits2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colTime2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.plotDataCheckBox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.maxCountUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.deviceTable)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -259,6 +260,44 @@
             this.deviceTable.Size = new System.Drawing.Size(635, 121);
             this.deviceTable.TabIndex = 105;
             // 
+            // colCOMPort
+            // 
+            this.colCOMPort.HeaderText = "COM Port";
+            this.colCOMPort.Name = "colCOMPort";
+            this.colCOMPort.ReadOnly = true;
+            this.colCOMPort.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // colDeviceType2
+            // 
+            this.colDeviceType2.HeaderText = "Device Type";
+            this.colDeviceType2.Name = "colDeviceType2";
+            this.colDeviceType2.ReadOnly = true;
+            this.colDeviceType2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colDeviceType2.Width = 150;
+            // 
+            // colReading2
+            // 
+            this.colReading2.HeaderText = "Reading";
+            this.colReading2.Name = "colReading2";
+            this.colReading2.ReadOnly = true;
+            this.colReading2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colReading2.Width = 110;
+            // 
+            // colUnits2
+            // 
+            this.colUnits2.HeaderText = "Units";
+            this.colUnits2.Name = "colUnits2";
+            this.colUnits2.ReadOnly = true;
+            this.colUnits2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // colTime2
+            // 
+            this.colTime2.HeaderText = "Time";
+            this.colTime2.Name = "colTime2";
+            this.colTime2.ReadOnly = true;
+            this.colTime2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colTime2.Width = 125;
+            // 
             // startRecordingButton
             // 
             this.startRecordingButton.Location = new System.Drawing.Point(12, 175);
@@ -308,55 +347,30 @@
             // 
             this.listDiagButton.Location = new System.Drawing.Point(569, 608);
             this.listDiagButton.Name = "listDiagButton";
-            this.listDiagButton.Size = new System.Drawing.Size(75, 76);
+            this.listDiagButton.Size = new System.Drawing.Size(75, 52);
             this.listDiagButton.TabIndex = 113;
             this.listDiagButton.Text = "List Diagnostics (Advanced)";
             this.listDiagButton.UseVisualStyleBackColor = true;
             this.listDiagButton.Click += new System.EventHandler(this.listDiagButton_Click);
             // 
-            // colCOMPort
+            // plotDataCheckBox
             // 
-            this.colCOMPort.HeaderText = "COM Port";
-            this.colCOMPort.Name = "colCOMPort";
-            this.colCOMPort.ReadOnly = true;
-            this.colCOMPort.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // colDeviceType2
-            // 
-            this.colDeviceType2.HeaderText = "Device Type";
-            this.colDeviceType2.Name = "colDeviceType2";
-            this.colDeviceType2.ReadOnly = true;
-            this.colDeviceType2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.colDeviceType2.Width = 150;
-            // 
-            // colReading2
-            // 
-            this.colReading2.HeaderText = "Reading";
-            this.colReading2.Name = "colReading2";
-            this.colReading2.ReadOnly = true;
-            this.colReading2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.colReading2.Width = 110;
-            // 
-            // colUnits2
-            // 
-            this.colUnits2.HeaderText = "Units";
-            this.colUnits2.Name = "colUnits2";
-            this.colUnits2.ReadOnly = true;
-            this.colUnits2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // colTime2
-            // 
-            this.colTime2.HeaderText = "Time";
-            this.colTime2.Name = "colTime2";
-            this.colTime2.ReadOnly = true;
-            this.colTime2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.colTime2.Width = 125;
+            this.plotDataCheckBox.AutoSize = true;
+            this.plotDataCheckBox.Enabled = false;
+            this.plotDataCheckBox.Location = new System.Drawing.Point(574, 666);
+            this.plotDataCheckBox.Name = "plotDataCheckBox";
+            this.plotDataCheckBox.Size = new System.Drawing.Size(70, 17);
+            this.plotDataCheckBox.TabIndex = 114;
+            this.plotDataCheckBox.Text = "Plot Data";
+            this.plotDataCheckBox.UseVisualStyleBackColor = true;
+            this.plotDataCheckBox.CheckedChanged += new System.EventHandler(this.plotDataCheckBox_CheckedChanged);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(657, 701);
+            this.Controls.Add(this.plotDataCheckBox);
             this.Controls.Add(this.listDiagButton);
             this.Controls.Add(this.stopRecodingButton);
             this.Controls.Add(this.startRecordingButton);
@@ -427,6 +441,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colReading2;
         private System.Windows.Forms.DataGridViewTextBoxColumn colUnits2;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTime2;
+        private System.Windows.Forms.CheckBox plotDataCheckBox;
     }
 }
 

@@ -4,8 +4,10 @@ using System.Diagnostics;
 using System.Windows.Forms.DataVisualization.Charting;
 using System.Drawing;
 
-namespace BoatDAQ2{
-    class Device {        
+namespace BoatDAQ2
+{
+    class Device
+    {
         protected List<long> deviceTimeStamps = new List<long>(10000);
         protected List<double> deviceValues = new List<double>(10000);
         private string port;
@@ -32,15 +34,13 @@ namespace BoatDAQ2{
             return port;
         }
 
-        public void initializeChart(string seriesName, string yAxisName, int numberOfSeries) {
+        public virtual void initializeChart(string seriesName, string yAxisName) {
             dataChart = new Chart();
             dataChart.ChartAreas.Add("ChartArea1");
             dataChart.ChartAreas[0].AxisX.Title = "Time (ms)";
             dataChart.ChartAreas[0].AxisY.Title = yAxisName;
-            for (int i = 0; i < numberOfSeries; i++) {
-                dataChart.Series.Add(seriesName + i.ToString());
-                dataChart.Series[i].ChartType = SeriesChartType.FastPoint;
-            }
+            dataChart.Series.Add(seriesName);
+            dataChart.Series[0].ChartType = SeriesChartType.FastPoint;
             dataChart.Size = new Size(623, 315);
             // dataChart.Visible = false;
         }
@@ -58,9 +58,9 @@ namespace BoatDAQ2{
         }
 
         public void clearChart() {
-                for (int j = 0; j < dataChart.Series.Count; j++) {
-                    dataChart.Series[j].Points.Clear();
-                }
+            for (int j = 0; j < dataChart.Series.Count; j++) {
+                dataChart.Series[j].Points.Clear();
+            }
         }
 
         public void setPort(string portName) {
