@@ -13,6 +13,8 @@ using System.Windows.Forms.DataVisualization.Charting;
 using System.IO.Ports;
 using System.Diagnostics;
 using System.Collections.Concurrent;
+using Excel = Microsoft.Office.Interop.Excel;
+
 
 namespace BoatDAQ2{
     public partial class Form1 : Form {
@@ -22,6 +24,7 @@ namespace BoatDAQ2{
         //or maybe 1 background worker for all data collection? test both implementations
         List<Chart> charts = new List<Chart>();
         string pathName = @"C:\Users\Public\BoatDAQ2Data.txt";
+        Excel.Application spreadsheet = new Excel.Application();
 
         public Form1() {
             InitializeComponent();
@@ -56,13 +59,13 @@ namespace BoatDAQ2{
             switch (deviceTypeBox.SelectedIndex) {
                 //0 = encoder
                 //1 = Rieker angle reader
-                //2 = speedometer
+                //2 = ultrasonic sensor
                 case 0:
                     QSBDevices tempQSB = new QSBDevices();
                     tempQSB.connectDevice(ports[portOptionsBox.SelectedIndex], deviceTable, outputText, 0);
                     devices.Add(tempQSB);
                     tempQSB.initializeChart("Encoder Count", "Count");
-                    tempQSB.setChartOrigin(12, 230 + 200 * (devices.Count - 1));
+                    //tempQSB.setChartOrigin(12, 230 + 200 * (devices.Count - 1));
                     Controls.Add(tempQSB.getChart());
                     zeroEncoderButton.Enabled = true;
                     maxCountUpDown.Enabled = true;
@@ -71,9 +74,16 @@ namespace BoatDAQ2{
                     RiekerInclinometer tempAngleReader = new RiekerInclinometer();
                     tempAngleReader.connectDevice(ports[portOptionsBox.SelectedIndex], deviceTable, outputText, 1);
                     devices.Add(tempAngleReader);
-                    tempAngleReader.initializeChart("Inclinometer" + tempAngleReader.getPort(), "Angle (degrees)");
-                    tempAngleReader.setChartOrigin(12, 230 + 200 * (devices.Count - 1));
+                    tempAngleReader.initializeChart("Inclinometer " + tempAngleReader.getPort(), "Angle (degrees)");
+                   // tempAngleReader.setChartOrigin(12, 230 + 200 * (devices.Count - 1));
                     Controls.Add(tempAngleReader.getChart());
+                    break;
+                case 2:
+                    UltrasonicSensor tempUltrasonic = new UltrasonicSensor();
+                    tempUltrasonic.connectDevice(ports[portOptionsBox.SelectedIndex], deviceTable, outputText, 2);
+                    devices.Add(tempUltrasonic);
+                    tempUltrasonic.initializeChart("Ultrasonic Sensor " + tempUltrasonic.getPort(), "Distance (cm)");
+                    Controls.Add(tempUltrasonic.getChart());
                     break;
                 default:
                     MessageBox.Show("to be implemented");
@@ -85,7 +95,7 @@ namespace BoatDAQ2{
 
         private void resizeCharts() {
             int count = devices.Count;
-            int individualChartHeight = 357 / devices.Count;
+            int individualChartHeight = 350 / devices.Count;
             for (int i = 0; i < count; i++) {
                 devices[i].getChart().Size = new Size(635, individualChartHeight);
                 devices[i].getChart().Location = new Point(12, 230 + i * (individualChartHeight + 20));
@@ -115,16 +125,11 @@ namespace BoatDAQ2{
             }
             dev.resetDevice();
             while (true) {
-                //  try {
                 if (worker.CancellationPending == true) { //cancellation requested
                     e.Cancel = true;
                     break;
                 }
                 dev.readData(deviceTable, rowNumber);
-                // }
-                // catch (Exception ex) {
-                //    outputText.AppendText(ex.Message + "ERROR\n");
-                // }
             }
         }
 
@@ -158,8 +163,7 @@ namespace BoatDAQ2{
             plotDataCheckBox.Checked = true;
             for (int i = 0; i < devices.Count; i++) {
                 backgroundWorkers[i].RunWorkerAsync(i);
-            }
-            
+            }           
         }
 
         private void stopRecodingButton_Click(object sender, EventArgs e) {
@@ -187,16 +191,7 @@ namespace BoatDAQ2{
         }
 
         private void listDiagButton_Click(object sender, EventArgs e) {
-            outputText.AppendText("number of devices: " + devices.Count + " number of " +
-                "background workers: " + backgroundWorkers.Count + "\n");
-            
-        }
-
-        private void showGraphsButton_Click(object sender, EventArgs e) {
-            for (int i = 0; i < devices.Count; i++) {
-                // Controls.Add(devices[i].getChart());
-                devices[i].makeChartVisible(this);
-            }
+            outputText.AppendText("number of devices: " + devices.Count + " number of " + "background workers: " + backgroundWorkers.Count + "\n");           
         }
 
         private void button3_Click(object sender, EventArgs e) {
@@ -237,9 +232,22 @@ namespace BoatDAQ2{
         }
 
         private void saveButton_Click(object sender, EventArgs e) {
-            for (int i = 0; i < devices.Count; i++) {
-                devices[i].exportData(saveFilePathText.Text);
+            string directoryName = System.IO.Path.GetDirectoryName(saveFilePathText.Text);
+            if (exportFileTypeBox.SelectedIndex == 0) {
+                //export as excel
+                //use exportData(excel file)
             }
+            else if(exportFileTypeBox.SelectedIndex == 1) {
+                //export as zip file
+                for (int i = 0; i < devices.Count; i++) {
+                    devices[i].exportData(directoryName); //make a temporary new folder
+                }
+                //directory now contains individual text files
+
+                //use exportData(), then zip all the files in that directory
+            }
+
+            
         }
 
         private void saveFilePath_Click(object sender, EventArgs e) {

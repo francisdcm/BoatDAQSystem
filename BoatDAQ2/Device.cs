@@ -4,16 +4,14 @@ using System.Diagnostics;
 using System.Windows.Forms.DataVisualization.Charting;
 using System.Drawing;
 
-namespace BoatDAQ2
-{
-    class Device
-    {
+namespace BoatDAQ2{
+    class Device {
         protected List<long> deviceTimeStamps = new List<long>(10000);
         protected List<double> deviceValues = new List<double>(10000);
         private string port;
         protected Stopwatch watch;
         protected Chart dataChart;
-        protected int deviceType; //0 for encoder, 1 for inclinometer, 99 for other
+        protected int deviceType; //0 for encoder, 1 for inclinometer, 2 for ultrasonic sensor, 99 for other
 
         public int getDeviceType() {
             return deviceType;
@@ -45,16 +43,8 @@ namespace BoatDAQ2
             // dataChart.Visible = false;
         }
 
-        public void setChartOrigin(int x, int y) {
-            dataChart.Location = new Point(x, y);
-        }
-
         public Chart getChart() {
             return dataChart;
-        }
-
-        public void makeChartVisible(Control aControl) {
-            dataChart.Visible = true;
         }
 
         public void clearChart() {

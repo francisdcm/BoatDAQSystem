@@ -27,7 +27,7 @@
         private void InitializeComponent() {
             this.deviceTypeBox = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.exportFileTypeBox = new System.Windows.Forms.ComboBox();
             this.outputText = new System.Windows.Forms.TextBox();
             this.saveButton = new System.Windows.Forms.Button();
             this.saveFilePath = new System.Windows.Forms.Button();
@@ -67,9 +67,9 @@
             // 
             this.deviceTypeBox.FormattingEnabled = true;
             this.deviceTypeBox.Items.AddRange(new object[] {
-            "Mercury 2000 Encoder",
-            "Rieker H4S1-70 Inclinometer",
-            "Speedometer",
+            "QSB/Mercury 2000 Encoder",
+            "Prolific/Rieker Inclinometer",
+            "Arduino/Ultrasonic Sensor",
             "Other"});
             this.deviceTypeBox.Location = new System.Drawing.Point(86, 21);
             this.deviceTypeBox.Name = "deviceTypeBox";
@@ -85,16 +85,16 @@
             this.label8.TabIndex = 102;
             this.label8.Text = "Device Type";
             // 
-            // comboBox1
+            // exportFileTypeBox
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.exportFileTypeBox.FormattingEnabled = true;
+            this.exportFileTypeBox.Items.AddRange(new object[] {
             "Excel File (.xlsx)",
             "Text Files (.zip of .txt)"});
-            this.comboBox1.Location = new System.Drawing.Point(84, 584);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(103, 21);
-            this.comboBox1.TabIndex = 101;
+            this.exportFileTypeBox.Location = new System.Drawing.Point(84, 584);
+            this.exportFileTypeBox.Name = "exportFileTypeBox";
+            this.exportFileTypeBox.Size = new System.Drawing.Size(103, 21);
+            this.exportFileTypeBox.TabIndex = 101;
             // 
             // outputText
             // 
@@ -377,7 +377,7 @@
             this.Controls.Add(this.deviceTable);
             this.Controls.Add(this.deviceTypeBox);
             this.Controls.Add(this.label8);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.exportFileTypeBox);
             this.Controls.Add(this.outputText);
             this.Controls.Add(this.saveButton);
             this.Controls.Add(this.saveFilePath);
@@ -411,7 +411,7 @@
 
         private System.Windows.Forms.ComboBox deviceTypeBox;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox exportFileTypeBox;
         private System.Windows.Forms.TextBox outputText;
         private System.Windows.Forms.Button saveButton;
         private System.Windows.Forms.Button saveFilePath;

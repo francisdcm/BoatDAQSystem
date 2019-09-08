@@ -69,12 +69,13 @@ namespace BoatDAQ2
                 return;
             }
             using (System.IO.StreamWriter fs = new System.IO.StreamWriter(pathName, true)) {
-                for(int i = 0; i<deviceTimeStamps.Count; i++) {
+                pathName = pathName.Substring(0, pathName.Length - 4) + "Inclinometer.txt"; //replace .txt with QSBDevices.txt
+                for (int i = 0; i<deviceTimeStamps.Count; i++) {
                     if(deviceValues[i] >= 0) {
-                        fs.WriteLine("Inclinometer" + "\t" + deviceTimeStamps[i] + "\t" + "+" + deviceValues[i].ToString()); //for pos values, to work with TwoIntervalStatsCalculator
+                        fs.WriteLine("Inclinometer" + "\t" + deviceTimeStamps[i].ToString() + "\t" + "+" + deviceValues[i].ToString()); //for pos values, to work with TwoIntervalStatsCalculator
                     }
                     else {
-                        fs.WriteLine("Inclinometer" + "\t" + deviceTimeStamps[i] + "\t" + deviceValues[i].ToString());
+                        fs.WriteLine("Inclinometer" + "\t" + deviceTimeStamps[i].ToString() + "\t" + deviceValues[i].ToString());
                     }
                 }
                 fs.Dispose();

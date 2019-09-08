@@ -49,9 +49,9 @@ namespace BoatDAQ2{
                 mDeviceManager = new DeviceManager();
                 mDeviceManager.Initialize();
             }
-            QSB_S aQSB = null; 
-           IList<IDevice> deviceManagerDevices = mDeviceManager.Devices;
-            for(int i = 0; i<deviceManagerDevices.Count; i++) {
+            QSB_S aQSB = null;
+            IList<IDevice> deviceManagerDevices = mDeviceManager.Devices;
+            for (int i = 0; i < deviceManagerDevices.Count; i++) {
                 QSBDeviceList.Add((QSB_S)deviceManagerDevices[i]);
             }
             for (int i = 0; i < QSBDeviceList.Count; i++) {
@@ -65,7 +65,7 @@ namespace BoatDAQ2{
                             deviceRowInTable.Add(aQSB.Connection, j); //associate port with row #
                         }
                     }
-                     var count = aQSB.StreamEncoderCount(0, 0);
+                    var count = aQSB.StreamEncoderCount(0, 0);
                     aQSB.OnRegisterValueChanged += aQSB_OnRegisterValueChanged;
                     aQSB.SetResolution((uint)100 * 100);
                 }
@@ -99,14 +99,12 @@ namespace BoatDAQ2{
         }
 
         public override void exportData(string pathName) {
+            if(stringData.Count != 0) {
+                MessageBox.Show("ERROR: No data to save.");
+                return;
+            }
+            pathName = pathName.Substring(0, pathName.Length - 4) + "QSBDevices.txt"; //replace .txt with QSBDevices.txt
             using (System.IO.StreamWriter fs = new System.IO.StreamWriter(pathName, true)) {
-                //for(int i = 0; i<encoderData.Count; i++) {
-                //    string QSBPort = QSBDeviceList[i].Connection;
-                //    for(int j = 0; j<encoderData[i].Count; j++) {
-                //        fs.WriteLine("QSB-D on " + QSBPort + "\t" + timeStamps[i][j].ToString() + "\t" + encoderData[i][j].ToString());
-
-                //    }
-                //}
                 for (int i = 0; i<stringData.Count; i++) {
                     fs.WriteLine(stringData[i]);
                 }
