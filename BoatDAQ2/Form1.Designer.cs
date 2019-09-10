@@ -70,11 +70,12 @@
             "QSB/Mercury 2000 Encoder",
             "Prolific/Rieker Inclinometer",
             "Arduino/Ultrasonic Sensor",
+            "Arduino/Speedometer",
             "Other"});
             this.deviceTypeBox.Location = new System.Drawing.Point(86, 21);
             this.deviceTypeBox.Name = "deviceTypeBox";
             this.deviceTypeBox.Size = new System.Drawing.Size(150, 21);
-            this.deviceTypeBox.TabIndex = 103;
+            this.deviceTypeBox.TabIndex = 1;
             // 
             // label8
             // 
@@ -89,12 +90,12 @@
             // 
             this.exportFileTypeBox.FormattingEnabled = true;
             this.exportFileTypeBox.Items.AddRange(new object[] {
-            "Excel File (.xlsx)",
-            "Text Files (.zip of .txt)"});
+            "Excel (.xlsx)",
+            "Text (.zip of .txt)"});
             this.exportFileTypeBox.Location = new System.Drawing.Point(84, 584);
             this.exportFileTypeBox.Name = "exportFileTypeBox";
             this.exportFileTypeBox.Size = new System.Drawing.Size(103, 21);
-            this.exportFileTypeBox.TabIndex = 101;
+            this.exportFileTypeBox.TabIndex = 12;
             // 
             // outputText
             // 
@@ -111,7 +112,7 @@
             this.saveButton.Location = new System.Drawing.Point(569, 582);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(75, 23);
-            this.saveButton.TabIndex = 98;
+            this.saveButton.TabIndex = 15;
             this.saveButton.Text = "Save Data";
             this.saveButton.UseVisualStyleBackColor = true;
             this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
@@ -121,7 +122,7 @@
             this.saveFilePath.Location = new System.Drawing.Point(537, 582);
             this.saveFilePath.Name = "saveFilePath";
             this.saveFilePath.Size = new System.Drawing.Size(26, 23);
-            this.saveFilePath.TabIndex = 97;
+            this.saveFilePath.TabIndex = 14;
             this.saveFilePath.Text = "...";
             this.saveFilePath.UseVisualStyleBackColor = true;
             this.saveFilePath.Click += new System.EventHandler(this.saveFilePath_Click);
@@ -140,14 +141,14 @@
             this.saveFilePathText.Location = new System.Drawing.Point(193, 584);
             this.saveFilePathText.Name = "saveFilePathText";
             this.saveFilePathText.Size = new System.Drawing.Size(338, 20);
-            this.saveFilePathText.TabIndex = 95;
+            this.saveFilePathText.TabIndex = 13;
             // 
             // button2
             // 
             this.button2.Location = new System.Drawing.Point(327, 175);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(117, 48);
-            this.button2.TabIndex = 94;
+            this.button2.TabIndex = 9;
             this.button2.Text = "Clear Plot and Data";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
@@ -158,7 +159,7 @@
             this.refreshPortsButton.Location = new System.Drawing.Point(550, 19);
             this.refreshPortsButton.Name = "refreshPortsButton";
             this.refreshPortsButton.Size = new System.Drawing.Size(99, 23);
-            this.refreshPortsButton.TabIndex = 93;
+            this.refreshPortsButton.TabIndex = 5;
             this.refreshPortsButton.Text = "Refresh Ports List]";
             this.refreshPortsButton.UseVisualStyleBackColor = false;
             this.refreshPortsButton.Click += new System.EventHandler(this.refreshPortsButton_Click);
@@ -168,7 +169,7 @@
             this.closePortButton.Location = new System.Drawing.Point(469, 19);
             this.closePortButton.Name = "closePortButton";
             this.closePortButton.Size = new System.Drawing.Size(75, 23);
-            this.closePortButton.TabIndex = 92;
+            this.closePortButton.TabIndex = 4;
             this.closePortButton.Text = "Disconnect";
             this.closePortButton.UseVisualStyleBackColor = true;
             this.closePortButton.Click += new System.EventHandler(this.closePortButton_Click);
@@ -178,7 +179,7 @@
             this.connectButton.Location = new System.Drawing.Point(383, 19);
             this.connectButton.Name = "connectButton";
             this.connectButton.Size = new System.Drawing.Size(80, 23);
-            this.connectButton.TabIndex = 89;
+            this.connectButton.TabIndex = 3;
             this.connectButton.Text = "Connect";
             this.connectButton.UseVisualStyleBackColor = true;
             this.connectButton.Click += new System.EventHandler(this.connectButton_Click);
@@ -189,7 +190,7 @@
             this.portOptionsBox.Location = new System.Drawing.Point(306, 21);
             this.portOptionsBox.Name = "portOptionsBox";
             this.portOptionsBox.Size = new System.Drawing.Size(70, 21);
-            this.portOptionsBox.TabIndex = 88;
+            this.portOptionsBox.TabIndex = 2;
             // 
             // label5
             // 
@@ -214,7 +215,7 @@
             this.maxCountUpDown.Location = new System.Drawing.Point(595, 201);
             this.maxCountUpDown.Name = "maxCountUpDown";
             this.maxCountUpDown.Size = new System.Drawing.Size(55, 20);
-            this.maxCountUpDown.TabIndex = 85;
+            this.maxCountUpDown.TabIndex = 11;
             this.maxCountUpDown.Value = new decimal(new int[] {
             100,
             0,
@@ -227,7 +228,7 @@
             this.button3.Location = new System.Drawing.Point(217, 175);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(104, 48);
-            this.button3.TabIndex = 84;
+            this.button3.TabIndex = 8;
             this.button3.Text = "Zero Timestamps";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
@@ -237,7 +238,7 @@
             this.zeroEncoderButton.Location = new System.Drawing.Point(449, 175);
             this.zeroEncoderButton.Name = "zeroEncoderButton";
             this.zeroEncoderButton.Size = new System.Drawing.Size(200, 23);
-            this.zeroEncoderButton.TabIndex = 83;
+            this.zeroEncoderButton.TabIndex = 10;
             this.zeroEncoderButton.Text = "Zero encoder values";
             this.zeroEncoderButton.UseVisualStyleBackColor = true;
             this.zeroEncoderButton.Click += new System.EventHandler(this.button1_Click);
@@ -303,7 +304,7 @@
             this.startRecordingButton.Location = new System.Drawing.Point(12, 175);
             this.startRecordingButton.Name = "startRecordingButton";
             this.startRecordingButton.Size = new System.Drawing.Size(103, 48);
-            this.startRecordingButton.TabIndex = 108;
+            this.startRecordingButton.TabIndex = 6;
             this.startRecordingButton.Text = "Start Recording";
             this.startRecordingButton.UseVisualStyleBackColor = true;
             this.startRecordingButton.Click += new System.EventHandler(this.startRecordingButton_Click);
@@ -313,7 +314,7 @@
             this.stopRecodingButton.Location = new System.Drawing.Point(121, 175);
             this.stopRecodingButton.Name = "stopRecodingButton";
             this.stopRecodingButton.Size = new System.Drawing.Size(90, 48);
-            this.stopRecodingButton.TabIndex = 109;
+            this.stopRecodingButton.TabIndex = 7;
             this.stopRecodingButton.Text = "Stop Recording";
             this.stopRecodingButton.UseVisualStyleBackColor = true;
             this.stopRecodingButton.Click += new System.EventHandler(this.stopRecodingButton_Click);
@@ -327,6 +328,7 @@
             this.menuStrip1.Size = new System.Drawing.Size(657, 24);
             this.menuStrip1.TabIndex = 112;
             this.menuStrip1.Text = "menuStrip1";
+            this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
             // 
             // fileToolStripMenuItem
             // 
@@ -348,7 +350,7 @@
             this.listDiagButton.Location = new System.Drawing.Point(569, 608);
             this.listDiagButton.Name = "listDiagButton";
             this.listDiagButton.Size = new System.Drawing.Size(75, 52);
-            this.listDiagButton.TabIndex = 113;
+            this.listDiagButton.TabIndex = 16;
             this.listDiagButton.Text = "List Diagnostics (Advanced)";
             this.listDiagButton.UseVisualStyleBackColor = true;
             this.listDiagButton.Click += new System.EventHandler(this.listDiagButton_Click);
@@ -360,7 +362,7 @@
             this.plotDataCheckBox.Location = new System.Drawing.Point(574, 666);
             this.plotDataCheckBox.Name = "plotDataCheckBox";
             this.plotDataCheckBox.Size = new System.Drawing.Size(70, 17);
-            this.plotDataCheckBox.TabIndex = 114;
+            this.plotDataCheckBox.TabIndex = 0;
             this.plotDataCheckBox.Text = "Plot Data";
             this.plotDataCheckBox.UseVisualStyleBackColor = true;
             this.plotDataCheckBox.CheckedChanged += new System.EventHandler(this.plotDataCheckBox_CheckedChanged);

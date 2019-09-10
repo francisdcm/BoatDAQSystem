@@ -55,12 +55,12 @@ namespace BoatDAQ2{
             return errors;
         }
 
-        public override void exportData(string pathName) {
+        public override void exportData(string directoryName) {
             if (deviceTimeStamps.Count == 0 || deviceValues.Count == 0) {
                 MessageBox.Show("ERROR: No data to save.");
                 return;
             }
-            pathName = pathName.Substring(0, pathName.Length - 4) + "Ultrasonic.txt"; //replace .txt with QSBDevices.txt
+           string pathName = System.IO.Path.Combine(directoryName, "BoatDAQ2Data_Ultrasonic.txt");
             using (System.IO.StreamWriter fs = new System.IO.StreamWriter(pathName, true)) {
                 for (int i = 0; i < deviceTimeStamps.Count; i++) {
                         fs.WriteLine("Ultrasonic Sensor" + "\t" + deviceTimeStamps[i].ToString() + "\t" + deviceValues[i].ToString());

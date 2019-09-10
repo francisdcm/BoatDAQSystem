@@ -4,6 +4,7 @@ using USDigital;
 using System.Windows.Forms.DataVisualization.Charting;
 using System.Drawing;
 using System;
+using Excel = Microsoft.Office.Interop.Excel;
 
 namespace BoatDAQ2{
     class QSBDevices : Device{
@@ -81,13 +82,13 @@ namespace BoatDAQ2{
             QSB_S aQSB = (QSB_S)sender;
             if (m_recordData) {
                 dataChart.Invoke((MethodInvoker)delegate { // Running on the UI thread
-                    dataChart.Series["QSB " + aQSB.Connection].Points.AddXY(args.TimeStamp, args.Value);
-                    stringData.Add("QSB-D on " + aQSB.Connection + "\t" + args.TimeStamp.ToString() + "\t" + args.Value.ToString());
+                    dataChart.Series["QSB " + aQSB.Connection].Points.AddXY(1.95*args.TimeStamp, args.Value);
+                    stringData.Add("QSB-D on " + aQSB.Connection + "\t" + (1.95*args.TimeStamp).ToString() + "\t" + args.Value.ToString());
                 });
             }
             else {
                 deviceTableRef[2, deviceRowInTable[aQSB.Connection]].Value = args.Value.ToString();
-                deviceTableRef[4, deviceRowInTable[aQSB.Connection]].Value = args.TimeStamp.ToString();
+                deviceTableRef[4, deviceRowInTable[aQSB.Connection]].Value = (1.95*args.TimeStamp).ToString();
             }
         }
 
@@ -98,12 +99,12 @@ namespace BoatDAQ2{
             }
         }
 
-        public override void exportData(string pathName) {
+        public override void exportData(string directoryName) {
             if(stringData.Count != 0) {
                 MessageBox.Show("ERROR: No data to save.");
                 return;
             }
-            pathName = pathName.Substring(0, pathName.Length - 4) + "QSBDevices.txt"; //replace .txt with QSBDevices.txt
+            string pathName = System.IO.Path.Combine(directoryName, "BoatDAQ2Data_QSBDevice.txt");
             using (System.IO.StreamWriter fs = new System.IO.StreamWriter(pathName, true)) {
                 for (int i = 0; i<stringData.Count; i++) {
                     fs.WriteLine(stringData[i]);
@@ -112,9 +113,27 @@ namespace BoatDAQ2{
             }
         }
 
+        public override void exportData(ref Excel.Worksheet excelWorksheet, string filePath) {
+            if (stringData.Count == 0) {
+                MessageBox.Show("ERROR: No data to save.");
+                return;
+            }
+            excelWorksheet.Cells[1, "A"] = "Device Type";
+            excelWorksheet.Cells[1, "B"] = "Time (ms)";
+            excelWorksheet.Cells[1, "C"] = "Encoder Count";
+            excelWorksheet.Name = "QSBData";
+            string[] components = new string[3];
+            for (int i = 0; i < stringData.Count; i++) {
+                components = stringData[i].Split('\t');
+                excelWorksheet.Cells[i + 2, "A"] = components[0];
+                excelWorksheet.Cells[i + 2, "B"] = components[1];
+                excelWorksheet.Cells[i + 2, "C"] = components[2];
+            }
+        }
+
         public override void resetDevice() {
             stringData.Clear();
-            for(int i =0; i<QSBDeviceList.Count; i++) { //read in the lists
+            for(int i=0; i<QSBDeviceList.Count; i++) { //read in the lists
                 QSBDeviceList[i].ResetTimeStamp();
             }            
         }

@@ -9,3 +9,4 @@ C:\Research\C# Code\BoatDAQ2\BoatDAQ2\bin\Release\BoatDAQ2.pdb
 C:\Research\C# Code\BoatDAQ2\BoatDAQ2\obj\Release\BoatDAQ2.csproj.CopyComplete
 C:\Research\C# Code\BoatDAQ2\BoatDAQ2\obj\Release\BoatDAQ2.exe
 C:\Research\C# Code\BoatDAQ2\BoatDAQ2\obj\Release\BoatDAQ2.pdb
+C:\Research\C# Code\BoatDAQ2\BoatDAQ2\obj\Release\BoatDAQ2.csproj.ResolveComReference.cache

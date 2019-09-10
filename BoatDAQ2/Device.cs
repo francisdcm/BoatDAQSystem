@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using System.Diagnostics;
 using System.Windows.Forms.DataVisualization.Charting;
 using System.Drawing;
+using Excel = Microsoft.Office.Interop.Excel;
 
 namespace BoatDAQ2{
     class Device {
@@ -63,7 +64,11 @@ namespace BoatDAQ2{
         public virtual void readData(DataGridView deviceTable, int rowNumber) {
         }
 
-        public virtual void exportData(string pathName) {
+        public virtual void exportData(string directoryName) {
+
+        }
+
+        public virtual void exportData(ref Excel.Worksheet excelWorksheet, string filePath) {
 
         }
 

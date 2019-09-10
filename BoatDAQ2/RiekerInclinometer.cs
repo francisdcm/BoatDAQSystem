@@ -12,12 +12,10 @@ using System.Drawing;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms.DataVisualization.Charting;
+using Excel = Microsoft.Office.Interop.Excel;
 
-
-namespace BoatDAQ2
-{
-    class RiekerInclinometer : Device
-    {
+namespace BoatDAQ2{
+    class RiekerInclinometer : Device{
         private SerialPort angleReader;
         private int errors;
 
@@ -37,21 +35,23 @@ namespace BoatDAQ2
             //reads an instant of data
             try {
                 if (watch.ElapsedMilliseconds % 10 <= 5) { //H4S output data protocol: every 25 ms, mod10 to slow it down                   
+                    string result = angleReader.ReadLine();
+                    long time = watch.ElapsedMilliseconds;
+                    double angleReading = double.Parse(result.Substring(1));
+                    if (result[0] == '-') { //for negative values
+                        angleReading = angleReading * -1;
+                    }
                     dataChart.Invoke((MethodInvoker)delegate {
                         //get current reading, plot it, save the data
-                        string result = angleReader.ReadLine();
-                        long time = watch.ElapsedMilliseconds;
-                        double angleReading = double.Parse(result.Substring(1));
-                        if (result[0] == '-') { //for negative values
-                            angleReading = angleReading * -1;
-                        }
+                        
                         // Running on the UI thread
                         dataChart.Series[0].Points.AddXY(time, angleReading);
-                        deviceTimeStamps.Add(time);
-                        deviceValues.Add(angleReading);
-                        deviceTable[2, rowNumber].Value = angleReading.ToString();
-                        deviceTable[4, rowNumber].Value = time.ToString();
-                    });                  
+                       
+                    });
+                    deviceTimeStamps.Add(time);
+                    deviceValues.Add(angleReading);
+                    deviceTable[2, rowNumber].Value = angleReading.ToString();
+                    deviceTable[4, rowNumber].Value = time.ToString();
                 }
             }
             catch {
@@ -63,13 +63,13 @@ namespace BoatDAQ2
             return errors;
         }
 
-        public override void exportData(string pathName) {
+        public override void exportData(string directoryName) {
             if (deviceTimeStamps.Count == 0 || deviceValues.Count == 0) {
                 MessageBox.Show("ERROR: No data to save.");
                 return;
             }
-            using (System.IO.StreamWriter fs = new System.IO.StreamWriter(pathName, true)) {
-                pathName = pathName.Substring(0, pathName.Length - 4) + "Inclinometer.txt"; //replace .txt with QSBDevices.txt
+           string pathName = System.IO.Path.Combine(directoryName, "BoatDAQ2Data_Inclinometer.txt");
+            using (System.IO.StreamWriter fs = new System.IO.StreamWriter(pathName, true)) {                           
                 for (int i = 0; i<deviceTimeStamps.Count; i++) {
                     if(deviceValues[i] >= 0) {
                         fs.WriteLine("Inclinometer" + "\t" + deviceTimeStamps[i].ToString() + "\t" + "+" + deviceValues[i].ToString()); //for pos values, to work with TwoIntervalStatsCalculator
@@ -79,6 +79,22 @@ namespace BoatDAQ2
                     }
                 }
                 fs.Dispose();
+            }
+        }
+
+        public override void exportData(ref Excel.Worksheet excelWorksheet, string filePath) {
+            if (deviceTimeStamps.Count == 0 || deviceValues.Count == 0) {
+                MessageBox.Show("ERROR: No data to save.");
+                return;
+            }
+            excelWorksheet.Cells[1, "A"] = "Device Type";
+            excelWorksheet.Cells[1, "B"] = "Time (ms)";
+            excelWorksheet.Cells[1, "C"] = "Angle (degrees)";
+            excelWorksheet.Name = "Inclinometer";
+            for (int i = 0; i<deviceTimeStamps.Count; i++) {
+                excelWorksheet.Cells[i+2, "A"] = "Inclinometer";
+                excelWorksheet.Cells[i+2, "B"] = deviceTimeStamps[i].ToString();
+                excelWorksheet.Cells[i+2, "C"] = deviceValues[i].ToString();       
             }
         }
 

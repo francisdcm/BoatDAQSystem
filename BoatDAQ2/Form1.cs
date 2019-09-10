@@ -14,6 +14,7 @@ using System.IO.Ports;
 using System.Diagnostics;
 using System.Collections.Concurrent;
 using Excel = Microsoft.Office.Interop.Excel;
+using System.IO.Compression;
 
 
 namespace BoatDAQ2{
@@ -23,8 +24,8 @@ namespace BoatDAQ2{
         List<BackgroundWorker> backgroundWorkers = new List<BackgroundWorker>(); //initialize
         //or maybe 1 background worker for all data collection? test both implementations
         List<Chart> charts = new List<Chart>();
-        string pathName = @"C:\Users\Public\BoatDAQ2Data.txt";
-        Excel.Application spreadsheet = new Excel.Application();
+        string pathName = @"C:\Users\Public\BoatDAQ2Data";
+        Excel.Application excelFile = new Excel.Application();
 
         public Form1() {
             InitializeComponent();
@@ -37,6 +38,8 @@ namespace BoatDAQ2{
             zeroEncoderButton.Enabled = false;
             maxCountUpDown.Enabled = false;
             Text = Application.ProductName + @" - Version " + Application.ProductVersion;
+            outputText.AppendText("Note: The file extension is purposefully missing on the save path. Use the last subdirectory as the name of the file" +
+                "you wish to create");
         }
 
         private void refreshPortsButton_Click(object sender, EventArgs e) {
@@ -49,6 +52,10 @@ namespace BoatDAQ2{
         }
 
         private void connectButton_Click(object sender, EventArgs e) {
+            if(deviceTypeBox.SelectedIndex == -1 || portOptionsBox.SelectedIndex == -1) {
+                MessageBox.Show("Error: Select device type and/or port.");
+                return;
+            }
             for (int i = 0; i < devices.Count; i++) {
                 if (devices[i].getPort() == ports[portOptionsBox.SelectedIndex]) {
                     MessageBox.Show("Error: Port is already addded as a device.");
@@ -85,6 +92,15 @@ namespace BoatDAQ2{
                     tempUltrasonic.initializeChart("Ultrasonic Sensor " + tempUltrasonic.getPort(), "Distance (cm)");
                     Controls.Add(tempUltrasonic.getChart());
                     break;
+                case 3:
+                    Speedometer tempSpeedometer = new Speedometer();
+                    tempSpeedometer.connectDevice(ports[portOptionsBox.SelectedIndex], deviceTable, outputText, 3);
+                    devices.Add(tempSpeedometer);
+                    tempSpeedometer.initializeChart("Speedometer Sensor " + tempSpeedometer.getPort(), "Speed (knots)");
+                    tempSpeedometer.getChart().Series[0].ChartType = SeriesChartType.FastLine;
+                    tempSpeedometer.getChart().Series[0].BorderWidth = 5;
+                    Controls.Add(tempSpeedometer.getChart());
+                    break;
                 default:
                     MessageBox.Show("to be implemented");
                     return;
@@ -98,7 +114,7 @@ namespace BoatDAQ2{
             int individualChartHeight = 350 / devices.Count;
             for (int i = 0; i < count; i++) {
                 devices[i].getChart().Size = new Size(635, individualChartHeight);
-                devices[i].getChart().Location = new Point(12, 230 + i * (individualChartHeight + 20));
+                devices[i].getChart().Location = new Point(12, 230 + i * (individualChartHeight + 10));
             }
         }
 
@@ -233,28 +249,45 @@ namespace BoatDAQ2{
 
         private void saveButton_Click(object sender, EventArgs e) {
             string directoryName = System.IO.Path.GetDirectoryName(saveFilePathText.Text);
+            if(exportFileTypeBox.SelectedIndex == -1) {
+                MessageBox.Show("Error: Please select the file export format.");
+                return;
+            }
             if (exportFileTypeBox.SelectedIndex == 0) {
-                //export as excel
-                //use exportData(excel file)
+                outputText.AppendText("Exporting data in .xlsx format. Please wait...");
+                string filePath = saveFilePathText.Text + ".xlsx";
+                saveFilePathText.Text = filePath;
+                var excelWorkBook = excelFile.Workbooks.Add(Missing.Value);
+                var excelSheets = excelWorkBook.Sheets as Excel.Sheets;
+                 for (int i = 0; i<devices.Count; i++) {
+                    var xlNewSheet = (Excel.Worksheet)excelSheets.Add(excelSheets[1], Type.Missing, Type.Missing, Type.Missing);
+                    devices[i].exportData(ref xlNewSheet, filePath);
+                 }
+                excelWorkBook.SaveAs(filePath);
+                excelWorkBook.Close();
+                excelFile.Quit();
+                outputText.AppendText("Finished exporting data in .xlsx format.");
             }
             else if(exportFileTypeBox.SelectedIndex == 1) {
-                //export as zip file
+                //make new directory, save text files in that directory, then zip that directory
+                outputText.AppendText("Exporting data in .txt format. Please wait...");
+                string newFolderPath = System.IO.Path.Combine(directoryName, "BoatDAQ2DataFolder");
+                System.IO.Directory.CreateDirectory(newFolderPath);
                 for (int i = 0; i < devices.Count; i++) {
-                    devices[i].exportData(directoryName); //make a temporary new folder
+                    devices[i].exportData(newFolderPath); //make a temporary new folder
                 }
-                //directory now contains individual text files
-
-                //use exportData(), then zip all the files in that directory
-            }
-
-            
+                string zipPath = System.IO.Path.Combine(directoryName, "BoatDAQ2Data.zip");
+                ZipFile.CreateFromDirectory(newFolderPath, zipPath);
+                System.IO.Directory.Delete(newFolderPath, true);
+                outputText.AppendText("Finished exporting data, .zip file created.");
+            }           
         }
 
         private void saveFilePath_Click(object sender, EventArgs e) {
             if (chooseFolderDialog.ShowDialog() == DialogResult.OK) {
                 pathName = chooseFolderDialog.SelectedPath;      //get the chosen path  
             }
-            string filename = "BoatDAQ2Data.txt";
+            string filename = "BoatDAQ2Data";
             pathName = System.IO.Path.Combine(pathName, filename);
             saveFilePathText.Text = pathName; // show the path in SavePathTextbox
         }
@@ -283,6 +316,10 @@ namespace BoatDAQ2{
                     }
                 }
             }
+        }
+
+        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e) {
+
         }
     }
 }
