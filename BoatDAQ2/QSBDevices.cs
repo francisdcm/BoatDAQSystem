@@ -69,6 +69,7 @@ namespace BoatDAQ2{
                     var count = aQSB.StreamEncoderCount(0, 0);
                     aQSB.OnRegisterValueChanged += aQSB_OnRegisterValueChanged;
                     aQSB.SetResolution((uint)100 * 100);
+                    debugText.AppendText("QSB connected on port " + aQSB.Connection + ".\n");
                 }
             }
             // Configure QSB to stream count on timer interval. Each interval equal to apx. 1.95 ms.

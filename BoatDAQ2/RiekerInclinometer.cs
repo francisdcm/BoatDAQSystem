@@ -1,17 +1,6 @@
 ﻿using System.Windows.Forms;
-using USDigital;
-using System.Collections.Generic;
 using System.IO.Ports;
 using System.Diagnostics;
-using System.ComponentModel;
-using System.Linq;
-using System;
-using System.Reflection;
-using System.Data;
-using System.Drawing;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms.DataVisualization.Charting;
 using Excel = Microsoft.Office.Interop.Excel;
 
 namespace BoatDAQ2{
@@ -25,7 +14,7 @@ namespace BoatDAQ2{
             angleReader.Open();
             string[] angleReaderProperties = { port, "Inclinometer", "unknown", "degrees", "unknown" };
             deviceTable.Rows.Add(angleReaderProperties);
-            debugText.AppendText("Connected on port " + angleReader.PortName + ".\n");
+            debugText.AppendText("Inclinometer connected on port " + angleReader.PortName + ".\n");
             deviceType = inputDeviceType;
             watch = new Stopwatch();
             watch.Start();

@@ -1,17 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using USDigital;
+﻿using System.Windows.Forms;
 using System.IO.Ports;
 using System.Diagnostics;
-using System.ComponentModel;
-using System.Reflection;
-using System.Data;
-using System.Drawing;
-using System.Windows.Forms.DataVisualization.Charting;
 using Excel = Microsoft.Office.Interop.Excel;
 
 namespace BoatDAQ2{
@@ -28,7 +17,7 @@ namespace BoatDAQ2{
             speedReader.Open();
             string[] speedometerProperties = { port, "Speedometer", "unknown", "knots", "unknown" };
             deviceTable.Rows.Add(speedometerProperties);
-            debugText.AppendText("Connected on port " + speedReader.PortName + ".\n");
+            debugText.AppendText("Speedometer connected on port " + speedReader.PortName + ".\n");
             deviceType = inputDeviceType;
             watch = new Stopwatch();
             watch.Start();

@@ -78,6 +78,5 @@ namespace BoatDAQ2{
             deviceTimeStamps.Clear();
             deviceValues.Clear();
         }
-
     }
 }

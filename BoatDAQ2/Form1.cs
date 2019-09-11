@@ -16,9 +16,10 @@ using System.Collections.Concurrent;
 using Excel = Microsoft.Office.Interop.Excel;
 using System.IO.Compression;
 
-
-namespace BoatDAQ2{
-    public partial class Form1 : Form {
+namespace BoatDAQ2
+{
+    public partial class Form1 : Form
+    {
         List<string> ports = new List<string>();
         List<Device> devices = new List<Device>();
         List<BackgroundWorker> backgroundWorkers = new List<BackgroundWorker>(); //initialize
@@ -39,7 +40,7 @@ namespace BoatDAQ2{
             maxCountUpDown.Enabled = false;
             Text = Application.ProductName + @" - Version " + Application.ProductVersion;
             outputText.AppendText("Note: The file extension is purposefully missing on the save path. Use the last subdirectory as the name of the file" +
-                "you wish to create");
+                "you wish to create\n");
         }
 
         private void refreshPortsButton_Click(object sender, EventArgs e) {
@@ -52,7 +53,7 @@ namespace BoatDAQ2{
         }
 
         private void connectButton_Click(object sender, EventArgs e) {
-            if(deviceTypeBox.SelectedIndex == -1 || portOptionsBox.SelectedIndex == -1) {
+            if (deviceTypeBox.SelectedIndex == -1 || portOptionsBox.SelectedIndex == -1) {
                 MessageBox.Show("Error: Select device type and/or port.");
                 return;
             }
@@ -67,6 +68,7 @@ namespace BoatDAQ2{
                 //0 = encoder
                 //1 = Rieker angle reader
                 //2 = ultrasonic sensor
+                //3 = speedometer
                 case 0:
                     QSBDevices tempQSB = new QSBDevices();
                     tempQSB.connectDevice(ports[portOptionsBox.SelectedIndex], deviceTable, outputText, 0);
@@ -82,7 +84,7 @@ namespace BoatDAQ2{
                     tempAngleReader.connectDevice(ports[portOptionsBox.SelectedIndex], deviceTable, outputText, 1);
                     devices.Add(tempAngleReader);
                     tempAngleReader.initializeChart("Inclinometer " + tempAngleReader.getPort(), "Angle (degrees)");
-                   // tempAngleReader.setChartOrigin(12, 230 + 200 * (devices.Count - 1));
+                    // tempAngleReader.setChartOrigin(12, 230 + 200 * (devices.Count - 1));
                     Controls.Add(tempAngleReader.getChart());
                     break;
                 case 2:
@@ -102,7 +104,7 @@ namespace BoatDAQ2{
                     Controls.Add(tempSpeedometer.getChart());
                     break;
                 default:
-                    MessageBox.Show("to be implemented");
+                    MessageBox.Show("To be implemented");
                     return;
             }
             addBackgroundWorker();
@@ -114,7 +116,7 @@ namespace BoatDAQ2{
             int individualChartHeight = 350 / devices.Count;
             for (int i = 0; i < count; i++) {
                 devices[i].getChart().Size = new Size(635, individualChartHeight);
-                devices[i].getChart().Location = new Point(12, 230 + i * (individualChartHeight + 10));
+                devices[i].getChart().Location = new Point(12, 230 + i * (individualChartHeight));
             }
         }
 
@@ -124,7 +126,6 @@ namespace BoatDAQ2{
             bgw.RunWorkerCompleted += new RunWorkerCompletedEventHandler(workHandlerCompleted);
             bgw.WorkerSupportsCancellation = true;
             backgroundWorkers.Add(bgw);
-            outputText.AppendText("Background worker added.\n");
         }
 
         private void workHandler(object sender, DoWorkEventArgs e) {
@@ -159,18 +160,18 @@ namespace BoatDAQ2{
             else {
                 outputText.AppendText("Data collection ended.\n");
             }
-            for(int i = 0; i<devices.Count; i++) {
-                if(devices[i].getDeviceType() == 0) {
+            for (int i = 0; i < devices.Count; i++) {
+                if (devices[i].getDeviceType() == 0) {
                     outputText.AppendText("Encoder data points collected:  " + ((QSBDevices)devices[i]).getQSBData().Count + "\n");
                 }
-                else if(devices[i].getDeviceType() == 1) {
+                else if (devices[i].getDeviceType() == 1) {
                     outputText.AppendText("Inclinometer data points collected:  " + devices[i].getDeviceValues().Count + "\n");
                 }
                 else {
                     outputText.AppendText("Data points collected:  " + devices[i].getDeviceValues().Count + "\n");
                 }
             }
-           
+
         }
 
         private void startRecordingButton_Click(object sender, EventArgs e) {
@@ -179,7 +180,7 @@ namespace BoatDAQ2{
             plotDataCheckBox.Checked = true;
             for (int i = 0; i < devices.Count; i++) {
                 backgroundWorkers[i].RunWorkerAsync(i);
-            }           
+            }
         }
 
         private void stopRecodingButton_Click(object sender, EventArgs e) {
@@ -189,7 +190,6 @@ namespace BoatDAQ2{
             plotDataCheckBox.Checked = false;
             stopRecodingButton.Enabled = false;
             startRecordingButton.Enabled = true;
-
         }
 
         private void Form1_Load(object sender, EventArgs e) { }
@@ -207,7 +207,7 @@ namespace BoatDAQ2{
         }
 
         private void listDiagButton_Click(object sender, EventArgs e) {
-            outputText.AppendText("number of devices: " + devices.Count + " number of " + "background workers: " + backgroundWorkers.Count + "\n");           
+            outputText.AppendText("number of devices: " + devices.Count + " number of " + "background workers: " + backgroundWorkers.Count + "\n");
         }
 
         private void button3_Click(object sender, EventArgs e) {
@@ -249,7 +249,7 @@ namespace BoatDAQ2{
 
         private void saveButton_Click(object sender, EventArgs e) {
             string directoryName = System.IO.Path.GetDirectoryName(saveFilePathText.Text);
-            if(exportFileTypeBox.SelectedIndex == -1) {
+            if (exportFileTypeBox.SelectedIndex == -1) {
                 MessageBox.Show("Error: Please select the file export format.");
                 return;
             }
@@ -259,16 +259,16 @@ namespace BoatDAQ2{
                 saveFilePathText.Text = filePath;
                 var excelWorkBook = excelFile.Workbooks.Add(Missing.Value);
                 var excelSheets = excelWorkBook.Sheets as Excel.Sheets;
-                 for (int i = 0; i<devices.Count; i++) {
+                for (int i = 0; i < devices.Count; i++) {
                     var xlNewSheet = (Excel.Worksheet)excelSheets.Add(excelSheets[1], Type.Missing, Type.Missing, Type.Missing);
                     devices[i].exportData(ref xlNewSheet, filePath);
-                 }
+                }
                 excelWorkBook.SaveAs(filePath);
                 excelWorkBook.Close();
                 excelFile.Quit();
-                outputText.AppendText("Finished exporting data in .xlsx format.");
+                outputText.AppendText("Finished exporting data in .xlsx format.\n");
             }
-            else if(exportFileTypeBox.SelectedIndex == 1) {
+            else if (exportFileTypeBox.SelectedIndex == 1) {
                 //make new directory, save text files in that directory, then zip that directory
                 outputText.AppendText("Exporting data in .txt format. Please wait...");
                 string newFolderPath = System.IO.Path.Combine(directoryName, "BoatDAQ2DataFolder");
@@ -279,8 +279,8 @@ namespace BoatDAQ2{
                 string zipPath = System.IO.Path.Combine(directoryName, "BoatDAQ2Data.zip");
                 ZipFile.CreateFromDirectory(newFolderPath, zipPath);
                 System.IO.Directory.Delete(newFolderPath, true);
-                outputText.AppendText("Finished exporting data, .zip file created.");
-            }           
+                outputText.AppendText("Finished exporting data, .zip file created.\n");
+            }
         }
 
         private void saveFilePath_Click(object sender, EventArgs e) {
@@ -302,9 +302,9 @@ namespace BoatDAQ2{
         }
 
         private void plotDataCheckBox_CheckedChanged(object sender, EventArgs e) {
-            if(plotDataCheckBox.Checked == true) {
-                for(int i = 0; i<devices.Count; i++) {
-                    if(devices[i].getDeviceType() == 0) {
+            if (plotDataCheckBox.Checked == true) {
+                for (int i = 0; i < devices.Count; i++) {
+                    if (devices[i].getDeviceType() == 0) {
                         ((QSBDevices)devices[i]).setRecordData(true);
                     }
                 }
@@ -318,8 +318,6 @@ namespace BoatDAQ2{
             }
         }
 
-        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e) {
-
-        }
+        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e) { }
     }
 }
