@@ -16,10 +16,8 @@ using System.Collections.Concurrent;
 using Excel = Microsoft.Office.Interop.Excel;
 using System.IO.Compression;
 
-namespace BoatDAQ2
-{
-    public partial class Form1 : Form
-    {
+namespace BoatDAQ2{
+    public partial class Form1 : Form{
         List<string> ports = new List<string>();
         List<Device> devices = new List<Device>();
         List<BackgroundWorker> backgroundWorkers = new List<BackgroundWorker>(); //initialize
@@ -27,6 +25,7 @@ namespace BoatDAQ2
         List<Chart> charts = new List<Chart>();
         string pathName = @"C:\Users\Public\BoatDAQ2Data";
         Excel.Application excelFile = new Excel.Application();
+        Stopwatch watch = new Stopwatch();
 
         public Form1() {
             InitializeComponent();
@@ -35,6 +34,7 @@ namespace BoatDAQ2
                 portOptionsBox.Items.Add(ports[i]);
             }
             stopRecodingButton.Enabled = false;
+            startRecordingButton.Enabled = false;
             saveFilePathText.Text = pathName;
             zeroEncoderButton.Enabled = false;
             maxCountUpDown.Enabled = false;
@@ -109,6 +109,7 @@ namespace BoatDAQ2
             }
             addBackgroundWorker();
             resizeCharts();
+            startRecordingButton.Enabled = true;
         }
 
         private void resizeCharts() {
@@ -171,7 +172,6 @@ namespace BoatDAQ2
                     outputText.AppendText("Data points collected:  " + devices[i].getDeviceValues().Count + "\n");
                 }
             }
-
         }
 
         private void startRecordingButton_Click(object sender, EventArgs e) {
@@ -229,6 +229,10 @@ namespace BoatDAQ2
         }
 
         private void closePortButton_Click(object sender, EventArgs e) {
+            if (deviceTypeBox.SelectedIndex == -1 || portOptionsBox.SelectedIndex == -1) {
+                MessageBox.Show("Error: Select device type and/or port.");
+                return;
+            }
             switch (deviceTypeBox.SelectedIndex) {
                 case 0:
                     MessageBox.Show("QSB cannot be disconnected. To disconnect, close application instead");
@@ -240,6 +244,12 @@ namespace BoatDAQ2
                             devices.RemoveAt(i);
                         }
                     }
+                    break;
+                case 2: 
+                    MessageBox.Show("Close ultrasonic sensor, to be implemented...");
+                    break;
+                case 3:
+                    MessageBox.Show("Close speedometer, to be implemented...");
                     break;
                 default:
                     MessageBox.Show("To be implemented...");

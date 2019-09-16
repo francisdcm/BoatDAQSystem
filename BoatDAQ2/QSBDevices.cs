@@ -3,7 +3,6 @@ using System.Windows.Forms;
 using USDigital;
 using System.Windows.Forms.DataVisualization.Charting;
 using System.Drawing;
-using System;
 using Excel = Microsoft.Office.Interop.Excel;
 
 namespace BoatDAQ2{
@@ -14,6 +13,8 @@ namespace BoatDAQ2{
         private Dictionary<string, int> deviceRowInTable = new Dictionary<string, int>(2);
         private bool m_recordData = false;
         DataGridView deviceTableRef;
+        private long watchFreq;
+
 
         public void setRecordData(bool recordData) {
             m_recordData = recordData;
@@ -31,6 +32,7 @@ namespace BoatDAQ2{
             for(int i = 0; i<QSBDeviceList.Count; i++) {
                 QSBDeviceList[i].ResetTimeStamp();
             }
+            // watch.Restart();
         }
 
         public override void initializeChart(string seriesName, string yAxisName) {
@@ -89,7 +91,7 @@ namespace BoatDAQ2{
             }
             else {
                 deviceTableRef[2, deviceRowInTable[aQSB.Connection]].Value = args.Value.ToString();
-                deviceTableRef[4, deviceRowInTable[aQSB.Connection]].Value = (1.95*args.TimeStamp).ToString();
+                deviceTableRef[4, deviceRowInTable[aQSB.Connection]].Value = (1.95 * args.TimeStamp).ToString();
             }
         }
 
@@ -101,7 +103,7 @@ namespace BoatDAQ2{
         }
 
         public override void exportData(string directoryName) {
-            if(stringData.Count != 0) {
+            if(stringData.Count == 0) {
                 MessageBox.Show("ERROR: No data to save.");
                 return;
             }
@@ -136,7 +138,7 @@ namespace BoatDAQ2{
             stringData.Clear();
             for(int i=0; i<QSBDeviceList.Count; i++) { //read in the lists
                 QSBDeviceList[i].ResetTimeStamp();
-            }            
+            }
         }
     }
 }

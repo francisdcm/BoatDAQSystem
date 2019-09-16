@@ -38,7 +38,7 @@ namespace BoatDAQ2{
                     deviceTimeStamps.Add(time);
                     deviceValues.Add(speedReading);
                     deviceTable[2, rowNumber].Value = speedReading.ToString();
-                    deviceTable[4, rowNumber].Value = time.ToString();
+                     deviceTable[4, rowNumber].Value = time.ToString();
                 }
             }
             catch {

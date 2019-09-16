@@ -24,3 +24,8 @@ C:\Research\C# Code\BoatDAQ2\BoatDAQ2\obj\Debug\BoatDAQ2.csproj.CoreCompileInput
 C:\Research\C# Code\BoatDAQ2\BoatDAQ2\obj\Debug\BoatDAQ2.csproj.CopyComplete
 C:\Research\C# Code\BoatDAQ2\BoatDAQ2\obj\Debug\BoatDAQ2.exe
 C:\Research\C# Code\BoatDAQ2\BoatDAQ2\obj\Debug\BoatDAQ2.pdb
+C:\Research\C# Code\BoatDAQ2\BoatDAQ2\bin\Debug\BoatDAQ2.exe.manifest
+C:\Research\C# Code\BoatDAQ2\BoatDAQ2\bin\Debug\BoatDAQ2.application
+C:\Research\C# Code\BoatDAQ2\BoatDAQ2\obj\Debug\BoatDAQ2.csproj.ResolveComReference.cache
+C:\Research\C# Code\BoatDAQ2\BoatDAQ2\obj\Debug\BoatDAQ2.exe.manifest
+C:\Research\C# Code\BoatDAQ2\BoatDAQ2\obj\Debug\BoatDAQ2.application

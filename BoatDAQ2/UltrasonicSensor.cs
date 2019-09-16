@@ -25,9 +25,7 @@ namespace BoatDAQ2{
                 if (watch.ElapsedMilliseconds % 75 <= 5) {
                     //get current reading, plot it, save the data
                     string result = (ultrasonicReader.ReadLine().Split('\t'))[1];
-
                     long time = watch.ElapsedMilliseconds;
-                    //MODIFY FOR ULTRASONIC SENSOR
                     double distance = double.Parse(result);
                     if (distance > 300) {
                         errors++;

@@ -31,11 +31,9 @@ namespace BoatDAQ2{
                         angleReading = angleReading * -1;
                     }
                     dataChart.Invoke((MethodInvoker)delegate {
-                        //get current reading, plot it, save the data
-                        
+                        //get current reading, plot it, save the data                        
                         // Running on the UI thread
-                        dataChart.Series[0].Points.AddXY(time, angleReading);
-                       
+                        dataChart.Series[0].Points.AddXY(time, angleReading);                       
                     });
                     deviceTimeStamps.Add(time);
                     deviceValues.Add(angleReading);
