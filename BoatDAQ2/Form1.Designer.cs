@@ -69,12 +69,12 @@
             this.deviceTypeBox.Items.AddRange(new object[] {
             "QSB/Mercury 2000 Encoder",
             "Prolific/Rieker Inclinometer",
-            "Arduino/Ultrasonic Sensor",
-            "Arduino/Speedometer",
+            "Arduino CH340/Ultrasonic Sensor",
+            "Arduino Leonardo/Speedometer",
             "Other"});
-            this.deviceTypeBox.Location = new System.Drawing.Point(86, 21);
+            this.deviceTypeBox.Location = new System.Drawing.Point(82, 21);
             this.deviceTypeBox.Name = "deviceTypeBox";
-            this.deviceTypeBox.Size = new System.Drawing.Size(150, 21);
+            this.deviceTypeBox.Size = new System.Drawing.Size(198, 21);
             this.deviceTypeBox.TabIndex = 1;
             // 
             // label8
@@ -156,9 +156,9 @@
             // refreshPortsButton
             // 
             this.refreshPortsButton.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.refreshPortsButton.Location = new System.Drawing.Point(550, 19);
+            this.refreshPortsButton.Location = new System.Drawing.Point(569, 19);
             this.refreshPortsButton.Name = "refreshPortsButton";
-            this.refreshPortsButton.Size = new System.Drawing.Size(99, 23);
+            this.refreshPortsButton.Size = new System.Drawing.Size(80, 23);
             this.refreshPortsButton.TabIndex = 5;
             this.refreshPortsButton.Text = "Refresh Ports List]";
             this.refreshPortsButton.UseVisualStyleBackColor = false;
@@ -166,9 +166,9 @@
             // 
             // closePortButton
             // 
-            this.closePortButton.Location = new System.Drawing.Point(469, 19);
+            this.closePortButton.Location = new System.Drawing.Point(493, 19);
             this.closePortButton.Name = "closePortButton";
-            this.closePortButton.Size = new System.Drawing.Size(75, 23);
+            this.closePortButton.Size = new System.Drawing.Size(70, 23);
             this.closePortButton.TabIndex = 4;
             this.closePortButton.Text = "Disconnect";
             this.closePortButton.UseVisualStyleBackColor = true;
@@ -176,9 +176,9 @@
             // 
             // connectButton
             // 
-            this.connectButton.Location = new System.Drawing.Point(383, 19);
+            this.connectButton.Location = new System.Drawing.Point(422, 19);
             this.connectButton.Name = "connectButton";
-            this.connectButton.Size = new System.Drawing.Size(80, 23);
+            this.connectButton.Size = new System.Drawing.Size(65, 23);
             this.connectButton.TabIndex = 3;
             this.connectButton.Text = "Connect";
             this.connectButton.UseVisualStyleBackColor = true;
@@ -187,7 +187,7 @@
             // portOptionsBox
             // 
             this.portOptionsBox.FormattingEnabled = true;
-            this.portOptionsBox.Location = new System.Drawing.Point(306, 21);
+            this.portOptionsBox.Location = new System.Drawing.Point(346, 21);
             this.portOptionsBox.Name = "portOptionsBox";
             this.portOptionsBox.Size = new System.Drawing.Size(70, 21);
             this.portOptionsBox.TabIndex = 2;
@@ -195,7 +195,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(242, 24);
+            this.label5.Location = new System.Drawing.Point(282, 24);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(58, 13);
             this.label5.TabIndex = 87;

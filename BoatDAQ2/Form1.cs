@@ -4,15 +4,11 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Reflection;
 using USDigital;
 using System.Windows.Forms.DataVisualization.Charting;
 using System.IO.Ports;
-using System.Diagnostics;
-using System.Collections.Concurrent;
 using Excel = Microsoft.Office.Interop.Excel;
 using System.IO.Compression;
 
@@ -22,10 +18,9 @@ namespace BoatDAQ2{
         List<Device> devices = new List<Device>();
         List<BackgroundWorker> backgroundWorkers = new List<BackgroundWorker>(); //initialize
         //or maybe 1 background worker for all data collection? test both implementations
-        List<Chart> charts = new List<Chart>();
         string pathName = @"C:\Users\Public\BoatDAQ2Data";
         Excel.Application excelFile = new Excel.Application();
-        Stopwatch watch = new Stopwatch();
+        bool QSBConnected = false;
 
         public Form1() {
             InitializeComponent();
@@ -78,6 +73,7 @@ namespace BoatDAQ2{
                     Controls.Add(tempQSB.getChart());
                     zeroEncoderButton.Enabled = true;
                     maxCountUpDown.Enabled = true;
+                    QSBConnected = true;
                     break;
                 case 1:
                     RiekerInclinometer tempAngleReader = new RiekerInclinometer();
@@ -264,6 +260,10 @@ namespace BoatDAQ2{
                 return;
             }
             if (exportFileTypeBox.SelectedIndex == 0) {
+                if(QSBConnected == true) {
+                    MessageBox.Show("Error: Cannot export data in Excel format when data includes QSB data.");
+                    return;
+                }
                 outputText.AppendText("Exporting data in .xlsx format. Please wait...");
                 string filePath = saveFilePathText.Text + ".xlsx";
                 saveFilePathText.Text = filePath;

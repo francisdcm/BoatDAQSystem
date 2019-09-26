@@ -22,8 +22,7 @@ namespace BoatDAQ2{
 
         public override void readData(DataGridView deviceTable, int rowNumber) {
             try {
-                if (watch.ElapsedMilliseconds % 75 <= 5) {
-                    //get current reading, plot it, save the data
+                if (watch.ElapsedMilliseconds % 75 <= 5) { //get current reading, plot it, save the data
                     string result = (ultrasonicReader.ReadLine().Split('\t'))[1];
                     long time = watch.ElapsedMilliseconds;
                     double distance = double.Parse(result);
@@ -31,8 +30,7 @@ namespace BoatDAQ2{
                         errors++;
                         return;
                     }
-                    dataChart.Invoke((MethodInvoker)delegate {                      
-                        // Running on the UI thread
+                    dataChart.Invoke((MethodInvoker)delegate { // Running on the UI thread
                         dataChart.Series[0].Points.AddXY(time, distance);                       
                     });
                     deviceTimeStamps.Add(time);
@@ -42,7 +40,7 @@ namespace BoatDAQ2{
                 }
             }
             catch {
-                errors++;
+                errors++; //for the occassional bad line of data, like "+75.00+75.00"
             }
         }
 

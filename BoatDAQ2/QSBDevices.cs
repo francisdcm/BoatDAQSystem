@@ -32,7 +32,6 @@ namespace BoatDAQ2{
             for(int i = 0; i<QSBDeviceList.Count; i++) {
                 QSBDeviceList[i].ResetTimeStamp();
             }
-            // watch.Restart();
         }
 
         public override void initializeChart(string seriesName, string yAxisName) {
