@@ -14,4 +14,4 @@ Ultrasonic distance sensor (connection via Arduino)
 
 Graphs data from these sensors in real time, and can export saved data in either .xlsx or tab-separated .txt format.
 
-![App UI](/ApplicationGUI.png)
+![App UI](/ApplicationGUI.PNG)
