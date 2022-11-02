@@ -64,6 +64,7 @@ namespace BoatDAQ2{
                 //1 = Rieker angle reader
                 //2 = ultrasonic sensor
                 //3 = speedometer
+                //4 = transducer
                 case 0:
                     QSBDevices tempQSB = new QSBDevices();
                     tempQSB.connectDevice(ports[portOptionsBox.SelectedIndex], deviceTable, outputText, 0);
@@ -98,6 +99,15 @@ namespace BoatDAQ2{
                     tempSpeedometer.getChart().Series[0].ChartType = SeriesChartType.FastLine;
                     tempSpeedometer.getChart().Series[0].BorderWidth = 5;
                     Controls.Add(tempSpeedometer.getChart());
+                    break;
+                case 4
+                    Transducer tempTransducer = new Transducer ();
+                    tempTransducer.connectDevice(ports[portOptionsBox.SelectedIndex], deviceTable, outputText, 4);
+                    devices.Add(tempTransducer);
+                    tempTransducer.initializeChart("Transducer Sensor " + tempTransducer.getPort(), "Pressure (Pa)");
+                    tempTransducer.getChart().Series[0].ChartType = SeriesChartType.FastLine;
+                    tempTransducer.getChart().Series[0].BorderWidth = 5;
+                    Controls.Add(tempTransducer.getChart());
                     break;
                 default:
                     MessageBox.Show("To be implemented");

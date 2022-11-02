@@ -29,3 +29,12 @@ C:\Research\C# Code\BoatDAQ2\BoatDAQ2\bin\Debug\BoatDAQ2.application
 C:\Research\C# Code\BoatDAQ2\BoatDAQ2\obj\Debug\BoatDAQ2.csproj.ResolveComReference.cache
 C:\Research\C# Code\BoatDAQ2\BoatDAQ2\obj\Debug\BoatDAQ2.exe.manifest
 C:\Research\C# Code\BoatDAQ2\BoatDAQ2\obj\Debug\BoatDAQ2.application
+C:\Users\CJMEMS\Source\Repos\francisdcm\BoatDAQSystem\BoatDAQ2\obj\Debug\BoatDAQ2.csproj.AssemblyReference.cache
+C:\Users\CJMEMS\Source\Repos\francisdcm\BoatDAQSystem\BoatDAQ2\obj\Debug\BoatDAQ2.csproj.SuggestedBindingRedirects.cache
+C:\Users\CJMEMS\Source\Repos\francisdcm\BoatDAQSystem\BoatDAQ2\obj\Debug\BoatDAQ2.csproj.ResolveComReference.cache
+C:\Users\CJMEMS\Source\Repos\francisdcm\BoatDAQSystem\BoatDAQ2\obj\Debug\BoatDAQ2.Form1.resources
+C:\Users\CJMEMS\Source\Repos\francisdcm\BoatDAQSystem\BoatDAQ2\obj\Debug\BoatDAQ2.Properties.Resources.resources
+C:\Users\CJMEMS\Source\Repos\francisdcm\BoatDAQSystem\BoatDAQ2\obj\Debug\BoatDAQ2.csproj.GenerateResource.cache
+C:\Users\CJMEMS\Source\Repos\francisdcm\BoatDAQSystem\BoatDAQ2\obj\Debug\BoatDAQ2.csproj.CoreCompileInputs.cache
+C:\Users\CJMEMS\Source\Repos\francisdcm\BoatDAQSystem\BoatDAQ2\obj\Debug\BoatDAQ2.exe
+C:\Users\CJMEMS\Source\Repos\francisdcm\BoatDAQSystem\BoatDAQ2\obj\Debug\BoatDAQ2.pdb
