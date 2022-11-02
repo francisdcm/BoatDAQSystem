@@ -96,6 +96,7 @@
     <Compile Include="QSBData.cs" />
     <Compile Include="QSBDevices.cs" />
     <Compile Include="RiekerInclinometer.cs" />
+    <Compile Include="Transducer.cs" />
     <Compile Include="Speedometer.cs" />
     <Compile Include="UltrasonicSensor.cs" />
     <EmbeddedResource Include="Form1.resx">
