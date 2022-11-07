@@ -100,7 +100,7 @@ namespace BoatDAQ2{
                     tempSpeedometer.getChart().Series[0].BorderWidth = 5;
                     Controls.Add(tempSpeedometer.getChart());
                     break;
-                case 4
+                case 4:
                     Transducer tempTransducer = new Transducer ();
                     tempTransducer.connectDevice(ports[portOptionsBox.SelectedIndex], deviceTable, outputText, 4);
                     devices.Add(tempTransducer);
@@ -257,6 +257,9 @@ namespace BoatDAQ2{
                 case 3:
                     MessageBox.Show("Close speedometer, to be implemented...");
                     break;
+                case 4:
+                    MessageBox.Show("Close Transducer, to be implemented...");
+                    break;
                 default:
                     MessageBox.Show("To be implemented...");
                     break;
@@ -339,5 +342,15 @@ namespace BoatDAQ2{
         }
 
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e) { }
+
+        private void deviceTypeBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void portOptionsBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

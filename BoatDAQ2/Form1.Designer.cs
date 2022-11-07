@@ -71,11 +71,14 @@
             "Prolific/Rieker Inclinometer",
             "Arduino CH340/Ultrasonic Sensor",
             "Arduino Leonardo/Speedometer",
+            "Arduino Uno/Transducer",
             "Other"});
             this.deviceTypeBox.Location = new System.Drawing.Point(82, 21);
+            this.deviceTypeBox.Margin = new System.Windows.Forms.Padding(4);
             this.deviceTypeBox.Name = "deviceTypeBox";
             this.deviceTypeBox.Size = new System.Drawing.Size(198, 21);
             this.deviceTypeBox.TabIndex = 1;
+            this.deviceTypeBox.SelectedIndexChanged += new System.EventHandler(this.deviceTypeBox_SelectedIndexChanged);
             // 
             // label8
             // 
@@ -191,6 +194,7 @@
             this.portOptionsBox.Name = "portOptionsBox";
             this.portOptionsBox.Size = new System.Drawing.Size(70, 21);
             this.portOptionsBox.TabIndex = 2;
+            this.portOptionsBox.SelectedIndexChanged += new System.EventHandler(this.portOptionsBox_SelectedIndexChanged);
             // 
             // label5
             // 
@@ -341,7 +345,7 @@
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(92, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(93, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 

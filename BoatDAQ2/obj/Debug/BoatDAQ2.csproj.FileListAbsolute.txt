@@ -38,3 +38,12 @@ C:\Users\CJMEMS\Source\Repos\francisdcm\BoatDAQSystem\BoatDAQ2\obj\Debug\BoatDAQ
 C:\Users\CJMEMS\Source\Repos\francisdcm\BoatDAQSystem\BoatDAQ2\obj\Debug\BoatDAQ2.csproj.CoreCompileInputs.cache
 C:\Users\CJMEMS\Source\Repos\francisdcm\BoatDAQSystem\BoatDAQ2\obj\Debug\BoatDAQ2.exe
 C:\Users\CJMEMS\Source\Repos\francisdcm\BoatDAQSystem\BoatDAQ2\obj\Debug\BoatDAQ2.pdb
+C:\Users\CJMEMS\Source\Repos\francisdcm\BoatDAQSystem\BoatDAQ2\bin\Debug\BoatDAQ2.exe.config
+C:\Users\CJMEMS\Source\Repos\francisdcm\BoatDAQSystem\BoatDAQ2\bin\Debug\BoatDAQ2.exe.manifest
+C:\Users\CJMEMS\Source\Repos\francisdcm\BoatDAQSystem\BoatDAQ2\bin\Debug\BoatDAQ2.application
+C:\Users\CJMEMS\Source\Repos\francisdcm\BoatDAQSystem\BoatDAQ2\bin\Debug\BoatDAQ2.exe
+C:\Users\CJMEMS\Source\Repos\francisdcm\BoatDAQSystem\BoatDAQ2\bin\Debug\BoatDAQ2.pdb
+C:\Users\CJMEMS\Source\Repos\francisdcm\BoatDAQSystem\BoatDAQ2\bin\Debug\AGauge.dll
+C:\Users\CJMEMS\Source\Repos\francisdcm\BoatDAQSystem\BoatDAQ2\obj\Debug\BoatDAQ2.exe.manifest
+C:\Users\CJMEMS\Source\Repos\francisdcm\BoatDAQSystem\BoatDAQ2\obj\Debug\BoatDAQ2.application
+C:\Users\CJMEMS\Source\Repos\francisdcm\BoatDAQSystem\BoatDAQ2\obj\Debug\BoatDAQ2.csproj.CopyComplete
