@@ -2,6 +2,7 @@
 using System.IO.Ports;
 using System.Diagnostics;
 using Excel = Microsoft.Office.Interop.Excel;
+using System;
 
 namespace BoatDAQ2{
     class Transducer : Device{       
@@ -26,18 +27,19 @@ namespace BoatDAQ2{
         public override void readData(DataGridView deviceTable, int rowNumber) {
             //reads an instant of data
             try {
-                if (watch.ElapsedMilliseconds % 100 <= 5) { //every 250 ms
+                if (watch.ElapsedMilliseconds % 10 <= 5) { //every 250 ms
                     string result = pressureReader.ReadLine();              // Reading the value (Volts) from the transducer
                     long time = watch.ElapsedMilliseconds;
-                    double pressureReading = (double.Parse(result) * 0.5)* 6894.76; // Replace this line with the transducer specifications (slope of the fcn that relates pressure to voltage, and converting psi to Pa)
+                    double pressureReading = double.Parse(result)*(2.5*6894/1024); // Replace this line with the transducer specifications (slope of the fcn that relates pressure to voltage, and converting psi to Pa)
+                    int PRPa = Convert.ToInt32(pressureReading);
                     dataChart.Invoke((MethodInvoker)delegate {
                         //get current reading, plot it, save the data                                     
                         // Running on the UI thread
-                        dataChart.Series[0].Points.AddXY(time, pressureReading);                      
+                        dataChart.Series[0].Points.AddXY(time, PRPa);                      
                     });
                     deviceTimeStamps.Add(time);
-                    deviceValues.Add(pressureReading);
-                    deviceTable[2, rowNumber].Value = pressureReading.ToString();
+                    deviceValues.Add(PRPa);
+                    deviceTable[2, rowNumber].Value = PRPa.ToString();
                      deviceTable[4, rowNumber].Value = time.ToString();
                 }
             }
